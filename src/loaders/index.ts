@@ -1,9 +1,9 @@
-const express = require("express")
-const path = require("path")
-const flash = require("express-flash")
-const methodOverride = require("method-override")
+import express from "express"
+import path from "path"
+import flash from "express-flash"
+import methodOverride from "method-override"
 
-const routeFile = require("../routes")
+const routeFile = require("../routes/index")
 
 export default async ({ app }) => {
   // Endpoint to check status
@@ -28,6 +28,9 @@ export default async ({ app }) => {
   app.use(methodOverride("_method"))
 
   // Start app
+
+  // const port = process.env.PORT || 3000
+
   app.listen(3000, () => {
     console.log("Server running")
   })

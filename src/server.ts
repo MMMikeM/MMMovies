@@ -1,11 +1,8 @@
-const loaders = require("./loaders");
-const express = require("express");
-
-const port = process.env.PORT || 3000;
+import express from "express"
 
 const startServer = async () => {
-  const app = express();
-  await require("./loaders").default({ app });
-};
+  const app = express()
+  await require("./loaders").default({ app })
+}
 
-startServer();
+startServer()
