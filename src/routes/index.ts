@@ -1,25 +1,22 @@
 const routes = require("express").Router()
-import { PrismaClient } from "@prisma/client"
-import * as searchController from "../controllers/search"
-import * as authController from "../controllers/auth"
+import * as searchController from "../services/search"
+import * as authController from "../services/auth"
 const passport = require("passport")
-
-const prisma = new PrismaClient()
 
 routes.get("/", authController.getLanding)
 
-routes.get("/search", searchController.moviePage)
+routes.get("/search", authController.checkAuth, searchController.moviePage)
 
-routes.post("/search", searchController.searchMovie)
+routes.post("/search", authController.checkAuth, searchController.searchMovie)
 
-routes.get("/to_watch", (req, res) => {
+routes.get("/to_watch", authController.checkAuth, (req, res) => {
   res.render("towatch", {
     title: "MMMovies to watch",
     message: "You have navigated to things!!!",
   })
 })
 
-routes.get("/watched", (req, res) => {
+routes.get("/watched", authController.checkAuth, (req, res) => {
   res.render("watched", {
     title: "MMMovies I have watched",
     message: "You have navigated to things!!!",
@@ -50,6 +47,10 @@ routes.delete("/logout", (req, res) => {
   console.log("signingout!")
   req.logOut()
   res.redirect("/login")
+})
+
+routes.get("*", (req, res) => {
+  res.render("notfound")
 })
 
 module.exports = routes
