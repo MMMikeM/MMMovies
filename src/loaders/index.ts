@@ -1,16 +1,9 @@
 const express = require("express")
 const path = require("path")
-const passport = require("passport")
-const session = require("express-session")
-const Strategy = require("passport-local").Strategy
 const flash = require("express-flash")
 const methodOverride = require("method-override")
 
 const routeFile = require("../routes")
-const authServices = require("../services/auth")
-
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
 
 export default async ({ app }) => {
   // Endpoint to check status
@@ -18,42 +11,8 @@ export default async ({ app }) => {
     res.status(200).end()
   })
 
-  // Initialise sessions using passport
-  app.use(
-    session({
-      secret: "SuperSecure",
-      resave: true,
-      saveUninitialized: true,
-      cookie: { secure: false },
-    })
-  )
-
-  passport.use(
-    new Strategy(
-      { usernameField: "email", passwordField: "password" },
-      authServices.authenticateUser
-    )
-  )
-
-  app.use(passport.initialize())
-  app.use(passport.session())
-
-  passport.serializeUser((user, done) => {
-    done(null, user.id)
-  })
-
-  passport.deserializeUser(async (id, done) => {
-    try {
-      const user = await prisma.user.findUnique({
-        where: {
-          id: id,
-        },
-      })
-      return done(null, user)
-    } catch (error) {
-      return done(error, null)
-    }
-  })
+  // import the authentication loader
+  await require("./authLoader").default({ app })
 
   // Set views & view engine
   app.set("views", path.join(__dirname, "../views"))
@@ -76,6 +35,7 @@ export default async ({ app }) => {
   // Import routes
   app.use("/", routeFile)
 
+  // neater error handling
   app.use((err, req, res, next) => {
     res.status(err.status || 500)
     res.json({
