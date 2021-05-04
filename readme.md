@@ -18,7 +18,9 @@ Drop volumes, reseed the db
 
 I've given myself a challenge to build something new and learn along the way. I have opted to build this project using an MVC approach, instead of using RESTful services and React/NextJS. This is partly due to the increased obfuscation of MVC, preventing endpoints from being exposed.
 
-## Important sourcesp
+<img src="https://raw.githubusercontent.com/MMMikeM/MMMovies/main/docs/MMMovies.jpg" width="100%" />
+
+## Important sources
 
 - [Ideal NodeJS Project Structure](https://softwareontheroad.com/ideal-nodejs-project-structure/#architecture)
 - [Prisma many-to-many: Explicit vs implicit](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
