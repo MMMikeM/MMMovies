@@ -6,13 +6,13 @@ First pull the project using:
 
 `git clone https://github.com/MMMikeM/MMMovies.git`
 
-Start the container composition, set up the database and (hopefully) seed the db
+Start the container composition, set up seed the db
 
 `make initialise`
 
-Drop the volumes, reset the db
+Drop volumes, reseed the db
 
-`make down_with_volume`
+`make refresh`
 
 ## About this project
 
@@ -28,13 +28,13 @@ I've given myself a challenge to build something new and learn along the way. I 
 
 - MVC in NodeJS and how to use templating engines
 - Many-to-many relations
-- Auth, using JWTs, assisted with argon2
+- Auth, ~~using JWTs~~ using, assisted with argon2
 
 ### Challenges that I have run into are 💪🏻
 
 - Dated documentation in libraries
 - Asynchronous iteration
-- Auth has a steep learning curve
+- Auth has a steep learning curve - particularly in MVC JS land.
 - Caching data between gets and posts
 - _Not_ spending a bunch of time making it look good
 
