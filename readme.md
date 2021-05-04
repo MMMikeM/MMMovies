@@ -18,6 +18,12 @@ Drop the volumes, reset the db
 
 I've given myself a challenge to build something new and learn along the way. I have opted to build this project using an MVC approach, instead of using RESTful services and React/NextJS. This is partly due to the increased obfuscation of MVC, preventing endpoints from being exposed.
 
+## Important sourcesp
+
+- [Ideal NodeJS Project Structure](https://softwareontheroad.com/ideal-nodejs-project-structure/#architecture)
+- [Prisma many-to-many: Explicit vs implicit](https://www.prisma.io/docs/concepts/components/prisma-schema/relations)
+- [User Auth in NodeJS with PassportJS](https://www.freecodecamp.org/news/learn-to-implement-user-authentication-in-node-apps-using-passport-js/)
+
 ### I am planning to learn 📚
 
 - MVC in NodeJS and how to use templating engines
