@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  node:
+    stdin_open: true
+    tty: true
+    build: .
+    ports:
+      - 3000:3000
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/usr/src/
+    depends_on:
+      - db
+    command: "npm run dev"
+
+  db:
+    stdin_open: true
+    tty: true
+    image: postgres:13-alpine
+    restart: "always"
+    expose:
+      - 5432
+    ports:
+      - "5432:5432"
+    container_name: mmmovies
+    environment:
+      POSTGRES_USER: secureuser
+      POSTGRES_PASSWORD: strongpassword
+      POSTGRES_DB: mmmovies
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
