@@ -30,11 +30,11 @@ I've given myself a challenge to build something new and learn along the way. I 
 
 - MVC in NodeJS and how to use templating engines
 - Many-to-many relations
-- Auth, ~~using JWTs~~ using, assisted with argon2
+- Auth, ~~using JWTs~~ using sessions, assisted with argon2
 
 ### Challenges that I have run into are 💪🏻
 
-- Dated documentation in libraries
+- Dated documentation
 - Asynchronous iteration
 - Auth has a steep learning curve - particularly in MVC JS land.
 - Caching data between gets and posts
@@ -43,3 +43,5 @@ I've given myself a challenge to build something new and learn along the way. I 
 ### Things that I'm super excited about 🍾
 
 - Getting smart with my Makefile and Docker - I've usually managed dbs pretty manually using PGAdmin
+- Argon2 is really interesting
+- Prisma is far simpler to use than other Typescript ORMS
