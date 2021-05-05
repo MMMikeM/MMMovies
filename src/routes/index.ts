@@ -1,22 +1,21 @@
 const routes = require("express").Router()
 import * as searchController from "../services/search"
 import * as authController from "../services/auth"
+import * as movieController from "../services/movies"
+import * as authMiddleware from "./middlewares/auth"
 const passport = require("passport")
 
-routes.get("/", authController.getLanding)
+routes.get("/", authMiddleware.getLanding)
 
-routes.get("/search", authController.checkAuth, searchController.moviePage)
+routes.get("/search", authMiddleware.checkAuth, searchController.moviePage)
 
-routes.post("/search", authController.checkAuth, searchController.searchMovie)
+routes.post("/search", authMiddleware.checkAuth, searchController.searchMovie)
 
-routes.get("/to_watch", authController.checkAuth, (req, res) => {
-  res.render("towatch", {
-    title: "MMMovies to watch",
-    message: "You have navigated to things!!!",
-  })
-})
+routes.post("/save", authMiddleware.checkAuth, searchController.saveMovie)
 
-routes.get("/watched", authController.checkAuth, (req, res) => {
+routes.get("/to_watch", authMiddleware.checkAuth, movieController.toWatch)
+
+routes.get("/watched", authMiddleware.checkAuth, (req, res) => {
   res.render("watched", {
     title: "MMMovies I have watched",
     message: "You have navigated to things!!!",
@@ -27,7 +26,7 @@ routes.get("/login", authController.getLogin)
 
 routes.post(
   "/login",
-  authController.checkNotAuth,
+  authMiddleware.checkNotAuth,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/login",

@@ -12,23 +12,20 @@ generator client {
 
 model Movie {
   id          String        @id @default(cuid())
+  userId      String
   createdAt   DateTime      @default(now())
+  movieId     Int           @unique
+  year        Int
   title       String        @db.VarChar(255)
+  rating      Float
   summary     String        
   review      String?     
   watched     Boolean       @default(false)
   published   Boolean       @default(true) 
-  genres      Genre[]
-  image       String
-  userId      String
+  url         String
   user        User          @relation(fields: [userId], references: [id])
 }
 
-model Genre {
-  id          String        @id @default(cuid())
-  name        String        @unique
-  movies      Movie[]
-}
 
 model User {
   id          String      @id @default(cuid())

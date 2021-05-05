@@ -5,12 +5,12 @@ html
     link(href="styles/style.css", rel="stylesheet", type='text/css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-.h-screen.w-screen.flex.bg-gray-100(style='min-height: 640px;')  
+.h-screen.min-w-screen.flex.bg-gray-100(style='min-height: 640px;')  
   block header
 
   block nav
-      .flex.flex-col.w-64
-        .flex.flex-col.flex-grow.border-r.border-gray-200.pt-5.pb-4.bg-white.overflow-y-auto
+      .w-80.flex.flex-col
+        .flex-grow.border-r.border-gray-200.pt-5.pb-4.bg-white.overflow-y-auto
           .flex.items-center.flex-shrink-0.space-y-5
               a.w-full.pl-3.border-transparent.text-gray-600.group.flex.items-center.py-2.text-3xl.font-semibold.border-l-4(href='/' class='hover:bg-gray-100 hover:text-gray-900')
                 svg.text-indigo-600.mr-3.h-8.w-8(class='group-hover:text-indigo-500 stroke-current' xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewbox='0 0 512 512' aria-hidden='true')
@@ -37,14 +37,6 @@ html
                 svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
                   path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z')
                 |             Search
-              a.border-transparent.text-gray-600.group.flex.items-center.px-3.py-2.text-sm.font-medium.border-l-4(href='/my_movies' class='hover:bg-gray-50 hover:text-gray-900')
-                svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
-                  path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z')
-                |             My Movies
-              a.border-transparent.text-gray-600.group.flex.items-center.px-3.py-2.text-sm.font-medium.border-l-4(href='/my_profile' class='hover:bg-gray-50 hover:text-gray-900')
-                svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
-                  path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4')
-                |             My profile
               form(action="/logout?_method=DELETE" method="POST")
                 button.border-transparent.text-gray-600.group.flex.items-center.px-3.py-2.text-sm.font-medium.border-l-4(type="submit" class='hover:bg-gray-50 hover:text-gray-900')
                   svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
@@ -53,10 +45,22 @@ html
 
 
   block content
-    main= content
+    main.w-full
+      if content
+        form(action="/save" method="POST").w-full.flex.flex-row.flex-wrap.gap-4.justify-center.bg-gray-100
+          .w-full
+            button(type="submit" class="w-80 h-10 mt-4 mx-auto bg-gray-700 text-white ring-gray-900 ring-opacity-5 placeholder-gray-400 appearance-none text-lg font-semibold rounded-md block px-3 py-2 border border-transparent shadow ring-1 sm:text-sm mb-4 focus:border-teal-500 focus:ring-teal-500 focus:outline-none") 
+              |     Submit
+          each item in content
+            .rounded-lg.overflow-hidden.shadow-lg.w-80.bg-white.relative
+              img.w-full.rounded-t-lg(src=item.url)
+              .flex.justify-between.p-6.flex-grow
+                .text-xl.mb-2.font-semibold= item.title
+                .absolute.bottom-4.right-4
+                  input(value=item.movieId type="checkbox" name="movieIds[]" class="w-4 h-4")
 
-  block messages
-    div= JSON.stringify(messages)
+  //- block messages
+  //-   div= JSON.stringify(messages)
   block footer
 
   block scripts
