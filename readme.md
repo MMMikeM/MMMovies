@@ -29,7 +29,7 @@ I've given myself a challenge to build something new and learn along the way. I 
 ### I am planning to learn 📚
 
 - MVC in NodeJS and how to use templating engines
-- Many-to-many relations
+- Cacheing
 - Auth, ~~using JWTs~~ using sessions, assisted with argon2
 
 ### Challenges that I have run into are 💪🏻

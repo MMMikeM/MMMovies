@@ -15,7 +15,7 @@ export const checkNotAuth = (req, res, next) => {
 
 export const getLanding = (req, res, next) => {
   if (req.isAuthenticated()) {
-    res.render("layout")
+    res.render("layout", { status: "Welcome!" })
   } else {
     res.render("index")
   }

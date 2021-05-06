@@ -5,6 +5,7 @@ import { Strategy } from "passport-local"
 const prisma = new PrismaClient()
 
 export const authenticateUser = async (email, password, done) => {
+  // Check to  see if user exists
   const user: any = await prisma.user.findUnique({
     where: { email: email },
   })
@@ -18,6 +19,7 @@ export const authenticateUser = async (email, password, done) => {
           id: user.id,
         })
       } else {
+        // if argon verification fails
         console.log("wrong password error")
         return done(null, false, { message: "Incorrect login details" })
       }
@@ -26,6 +28,7 @@ export const authenticateUser = async (email, password, done) => {
       return done(error)
     }
   } else {
+    // if user couldn't be found
     console.log("No user exists error")
     return done(null, false, { message: "Incorrect login details" })
   }

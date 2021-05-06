@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title= title
+    title= title || "MMMovies"
     link(href="styles/style.css", rel="stylesheet", type='text/css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
@@ -29,10 +29,6 @@ html
                     path(fill='none' d='M0 0h24v24H0z')
                     path(d='M17 2h3a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h3V0h2v2h6V0h2v2zm0 2v2h-2V4H9v2H7V4H5v16h14V4h-2zM7 8h10v2H7V8zm0 4h10v2H7v-2z')                
                 |             To Watch
-              a.border-transparent.text-gray-600.group.flex.items-center.px-3.py-2.text-sm.font-medium.border-l-4(href='/watched' class='hover:bg-gray-50 hover:text-gray-900')
-                svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
-                  path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z')
-                |             Watched
               a.border-transparent.text-gray-600.group.flex.items-center.px-3.py-2.text-sm.font-medium.border-l-4(href='/search' class='hover:bg-gray-50 hover:text-gray-900')
                 svg.text-gray-400.mr-3.h-6.w-6(class='group-hover:text-gray-500' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' aria-hidden='true')
                   path(stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z')
@@ -46,6 +42,7 @@ html
 
   block content
     main.w-full
+      .h-12.text-2xl.p-8= status
       if content
         form(action="/save" method="POST").w-full.flex.flex-row.flex-wrap.gap-4.justify-center.bg-gray-100
           .w-full
@@ -59,10 +56,9 @@ html
                 .absolute.bottom-4.right-4
                   input(value=item.movieId type="checkbox" name="movieIds[]" class="w-4 h-4")
 
-  //- block messages
-  //-   div= JSON.stringify(messages)
   block footer
 
-  block scripts
-    script(src="scripts/alpine.js", type='text/javascript')    
+  //- to be used at a later stage for frontend reactivity 
+  //- block scripts
+  //-   script(src="scripts/alpine.js", type='text/javascript')    
 

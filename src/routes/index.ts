@@ -15,13 +15,6 @@ routes.post("/save", authMiddleware.checkAuth, searchController.saveMovie)
 
 routes.get("/to_watch", authMiddleware.checkAuth, movieController.toWatch)
 
-routes.get("/watched", authMiddleware.checkAuth, (req, res) => {
-  res.render("watched", {
-    title: "MMMovies I have watched",
-    message: "You have navigated to things!!!",
-  })
-})
-
 routes.get("/login", authController.getLogin)
 
 routes.post(

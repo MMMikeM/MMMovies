@@ -13,7 +13,7 @@ export const moviePage = (req, res) => {
 }
 
 export const saveMovie = async (req, res) => {
-  // req.user.id
+  // Grab the checked boxes, grab data from cache, add userId to each object
   const movieData = req.body.movieIds.map((movieId) => {
     const tempData: any = myCache.get(movieId)
     tempData.userId = req.user.id
@@ -24,11 +24,9 @@ export const saveMovie = async (req, res) => {
     data: movieData,
   })
 
-  console.log(results)
-
-  res.render("search", {
+  res.render("layout", {
     title: "MMMovie Search",
-    message: "You have navigated to stuff!!!",
+    status: "Movie(s) saved",
   })
 }
 
